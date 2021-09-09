@@ -14,6 +14,7 @@ int main(void)
 		else
 			printf("¾Æ½ºÅ° code=%d\n", chr);
 	}while(1);
+	
 	return 0;
 }
 
