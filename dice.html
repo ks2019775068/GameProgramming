@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>망할 주사위</title>
+
+   <script type="text/javascript">
+      var cwidth      =   100;
+      var cheight      =   300;
+      var   dicex      =   50;
+      var dicey      =   50;
+      var   dicewidth   =   100;
+      var   diceheight   =   100;
+      var   dotrad      =   6;
+      var   ctx;
+      var   dx;
+      var   dy;
+      var   firstturn   =   true;
+      
+      var   point;
+      
+      function throwdice() 
+      {
+         var   sum;
+         var   ch   =   1 ;
+         
+         sum   =    ch;
+         dx   =   dicex;
+         dy   =   dicey;
+         drawface( ch );
+         
+         dx   =   dicex + 150;
+         ch   =   2;
+         
+         sum   +=   ch;
+         drawface( ch );
+
+         dx   =   dicex + 300;
+         ch   =   3;
+         
+         sum   +=   ch;
+         drawface( ch );
+         
+         dy   =   dicey + 150;
+         ch   =   6;
+         
+         sum   +=   ch;
+         drawface( ch );
+
+         dx   =   dicex ;
+         ch   =   4;
+         
+         sum   +=   ch;
+         drawface( ch );
+
+
+         dx   =   dicex + 150 ;
+         ch   =   5;
+         
+         sum   +=   ch;
+         drawface( ch );
+      }
+      
+      
+      function drawface( n ) 
+      {
+         ctx            =   document.getElementById( "canvas" ).getContext( "2d" );
+         ctx.lineWidth   =   5;
+         ctx.clearRect( dx, dy, dicewidth, diceheight );
+         ctx.strokeRect( dx, dy, dicewidth, diceheight );
+         
+         var dotx;      //   <-- 요녀석이 왜 필요한거지?
+         var   doty;      //   <-- 요녀석은 대체 왜 필요한 거임?
+         
+         
+         switch ( n ) {
+         case 1:
+            draw1();
+            break;
+         case 2:
+            draw2();
+            break;
+         case 3:
+            draw2();
+            draw1();
+            break;
+         case 4:
+            draw4();
+            break;
+         case 5:
+            draw4();
+            draw1();
+            break;
+         case 6:
+            draw4();
+            draw2mid();
+            break;
+         }
+      }
+      
+      function draw1() {
+         var dotx;
+         var doty;
+         
+         ctx.beginPath();
+         
+         dotx   =   dx + 0.5 * dicewidth;
+         doty   =   dy + 0.5 * diceheight;
+         ctx.arc( dotx, doty, dotrad, 0, Math.PI * 2, true );
+         
+         ctx.closePath();
+         ctx.fill();
+      }
+      
+      function draw2() {
+         var dotx;
+         var doty;
+         
+         ctx.beginPath();
+         
+         dotx   =   dx + 3 * dotrad;
+         doty   =   dy + 3 * dotrad;
+         ctx.arc( dotx, doty, dotrad, 0, Math.PI * 2, true );
+         
+         dotx   =   dx + dicewidth - 3 * dotrad;
+         doty   =   dy + diceheight - 3 * dotrad;
+         ctx.arc( dotx, doty, dotrad, 0, Math.PI * 2, true );
+         
+         ctx.closePath();
+         ctx.fill();
+      }
+      
+      function draw4() {
+         var dotx;
+         var doty;
+         
+         ctx.beginPath();
+         
+         dotx   =   dx + 3 * dotrad;
+         doty   =   dy + 3 * dotrad;
+         ctx.arc( dotx, doty, dotrad, 0, Math.PI * 2, true );
+         
+         dotx   =   dx + dicewidth - 3 * dotrad;
+         doty   =   dy + diceheight - 3 * dotrad;
+         ctx.arc( dotx, doty, dotrad, 0, Math.PI * 2, true );
+         
+         ctx.closePath();      //   이것도 사실 필요없는 부분임
+         ctx.fill();            //   이것도 사실 필요없는 부분임.
+         
+         ctx.beginPath();
+         
+         dotx   =   dx + 3 * dotrad;
+         doty   =   dy + diceheight - 3 * dotrad;
+         ctx.arc( dotx, doty, dotrad, 0, Math.PI * 2, true );
+         
+         dotx   =   dx + dicewidth - 3 * dotrad;
+         doty   =   dy + 3 * dotrad;
+         ctx.arc( dotx, doty, dotrad, 0, Math.PI * 2, true );
+         
+         ctx.closePath();
+         ctx.fill();
+      }
+      
+      function draw2mid() {
+         var dotx;
+         var doty;
+         
+         ctx.beginPath();
+         
+         dotx   =   dx + 3 * dotrad;
+         doty   =   dy + 0.5 * diceheight;
+         ctx.arc( dotx, doty, dotrad, 0, Math.PI * 2, true );
+         
+         dotx   =   dx + dicewidth - 3 * dotrad;
+         doty   =   dy + 0.5 * diceheight;
+         ctx.arc( dotx, doty, dotrad, 0, Math.PI * 2, true );
+         
+         ctx.closePath();
+         ctx.fill();
+      }
+      
+   </script>
+   
+   
+   
+</head>
+<body>
+   
+   <canvas id="canvas" width="500" height="500">
+      이 브라우저는 HTML5 Canvas를 지원하지 않습니다.
+   </canvas>
+   <br/>
+   
+<script>throwdice();</script>
+
+</body>
+</html>
